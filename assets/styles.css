@@ -4,3 +4,9 @@ div.box.right {
 th, td {
 	text-align: center;
 }
+div.header {
+	margin-top: 5px;
+}
+div.alert a {
+	color: white;
+}

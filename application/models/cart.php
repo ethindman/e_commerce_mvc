@@ -8,7 +8,6 @@ class Cart extends CI_Model {
 		$products = $this->db->query( $query )->result_array();
 		return $products;
 	}
-
 }
 
 //End of Cart Model

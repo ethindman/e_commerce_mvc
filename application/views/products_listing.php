@@ -18,6 +18,16 @@
 <body>
 	<div class="container">
 		<div class="header">
+<?php 
+		if($this->session->flashdata('success'))
+		{
+?>		<div class="alert alert-success alert-dismissible" role="alert">
+  			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  			<strong>Nice!</strong> <?= $this->session->flashdata('success'); ?>
+			</div>
+<?php
+		 	}
+?>
 			<div class="row">
 				<div class="box col-lg-6 col-md-6 col-sm-6 col-xs-6">
 					<h3>Products</h3>
@@ -56,7 +66,7 @@
 									</select>
 							</td>
 							<td>
-								<button class="btn btn-success">Add to Cart</button>
+								<button type="button" class="btn btn-danger">Left</button>
 								<input type="hidden" name="id" value="<?= $product['id'] ?>">
 								</form>
 							</td>

@@ -18,6 +18,16 @@
 <body>
 	<div class="container">
 		<div class="header">
+<?php 
+		if(!$this->session->userdata('orders'))
+		{
+?>		<div class="alert alert-info alert-dismissible" role="alert">
+  			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  			<strong>Hey!</strong> You don't appear to have anything in your cart. Why not <a href="home">add something</a>?
+			</div>
+<?php
+		 	}
+?>
 			<div class="row">
 				<div class="box col-lg-6 col-md-6 col-sm-6 col-xs-6">
 					<h3>Check Out</h3>
@@ -40,15 +50,17 @@
 					</thead>
 					<tbody>
 <?php 			$items = $this->session->userdata('orders');
-
+						$total = 0;
 						foreach ($items as $key => $item) 
 						{
 							$query = "SELECT * FROM products WHERE id = ?";
 							$result = $this->db->query( $query, array($item['id']))->row_array();
+							$price = $result['price'] * $item['quantity'];
+							$total+=$price;
 ?>						<tr>
 								<td><?= $item['quantity'] ?></td>
 								<td><?= $result['name'] ?></td>
-								<td>$<?= $result['price'] * $item['quantity']  ?></td>
+								<td>$<?= $price ?></td>
 								<td>
 									<form action="remove" method="post">
 										<button class="btn btn-danger">Delete</button>
@@ -60,11 +72,35 @@
 ?>						<tr>
 								<td></td>
 								<td>Total:</td>
-								<td>$500</td>
+								<td>$<?= $total ?></td>
 								<td></td>
 							</tr>
 					</tbody>
 				</table>
+			</div>
+		</div>
+		<div class="row">
+			<div class="box col-lg-6">
+				<h3>Billing Information</h3>
+				<form action="#" method="post">
+				  <div class="form-group">
+				    <label for="first_name">First Name:</label>
+				    <input type="text" name="first_name" class="form-control" id="first_name" placeholder="First Name">
+				  </div>
+				  <div class="form-group">
+				    <label for="last_name">Name:</label>
+				    <input type="text" name="last_name" class="form-control" id="last_name" placeholder="Last Name">
+				  </div>
+				  <div class="form-group">
+				    <label for="address">Address:</label>
+				    <input type="text" name="address" class="form-control" id="address" placeholder="ex. 1310 SW 147th Street">
+				  </div>
+				  <div class="form-group">
+				    <label for="card_number">Card Number:</label>
+				    <input type="number" name="card_number" class="form-control" id="card_number" placeholder="Card Number">
+				  </div>
+				  <button type="submit" class="btn btn-success">Order</button>
+				</form>
 			</div>
 		</div>
 	</div>

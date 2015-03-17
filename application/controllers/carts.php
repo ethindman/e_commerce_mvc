@@ -2,12 +2,6 @@
 
 class Carts extends CI_Controller {
 
-	// public function __construct()
-	// {
-	// 	parent::__construct();
-	// 	$this->output->enable_profiler();
-	// }
-
 	public function index()
 	{
 		$products = $this->cart->retrieveAllProducts();
@@ -24,6 +18,7 @@ class Carts extends CI_Controller {
 		$cart = $this->session->userdata('orders');
 		$cart[] = $this->input->post();
 		$this->session->set_userdata('orders', $cart);
+		$this->session->set_flashdata('success', 'Item was added to your cart!');
 		redirect('/');	
 	}
 
@@ -35,6 +30,7 @@ class Carts extends CI_Controller {
 		$this->session->set_userdata('orders', $cart);		
 		redirect('/cart');
 	}
+	
 }
 
 //end of Carts controller
