@@ -66,7 +66,7 @@
 									</select>
 							</td>
 							<td>
-								<button type="button" class="btn btn-danger">Left</button>
+								<button class="btn btn-primary">Add to Cart</button>
 								<input type="hidden" name="id" value="<?= $product['id'] ?>">
 								</form>
 							</td>
